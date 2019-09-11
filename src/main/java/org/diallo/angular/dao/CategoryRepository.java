@@ -11,6 +11,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RepositoryRestResource
+//croos pour autoriser les url venant du front
 @CrossOrigin("*")
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 	
