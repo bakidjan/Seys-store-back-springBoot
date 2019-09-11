@@ -42,7 +42,7 @@ public class AngularApplication implements CommandLineRunner{
 		
 		Random rd = new Random();
 		categoryRepository.findAll().forEach(c->{
-			
+			//parcours des produits
 			for (int i = 0; i < 10; i++) {
 				Product p = new Product();
 				p.setName(RandomString.make(18));
