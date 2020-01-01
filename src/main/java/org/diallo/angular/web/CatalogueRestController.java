@@ -21,11 +21,12 @@ public class CatalogueRestController {
 	@Autowired
 	private ProductRepository productRepository;
 
+
 //	public CatalogueRestController(ProductRepository productRepository) {
 //		super();
 //		this.productRepository = productRepository;
 //	}
-//	
+//
 
 	@GetMapping(path = "/photoProduct/{id}", produces = MediaType.IMAGE_PNG_VALUE)
 	public byte[] getPhoto(@PathVariable("id") Long id) throws Exception {
