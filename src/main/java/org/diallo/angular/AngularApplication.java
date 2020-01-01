@@ -45,12 +45,12 @@ public class AngularApplication implements CommandLineRunner{
 			//parcours des produits
 			for (int i = 0; i < 10; i++) {
 				Product p = new Product();
-				p.setName(RandomString.make(18));
+				p.setName(RandomString.make(7));
 				p.setAvailable(rd.nextBoolean());
 				p.setPromotion(rd.nextBoolean());
 				p.setSelected(rd.nextBoolean());
 				p.setCategory(c);
-				p.setCurrentPrice(100+rd.nextInt(10000));
+				p.setCurrentPrice(100+rd.nextInt(1000));
 				p.setPhotoName("unknown.png");
 			    productRepository.save(p);
 				
