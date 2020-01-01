@@ -31,5 +31,7 @@ public class Product {
 	private String photoName;
 	@ManyToOne
 	private Category category;
+	@Transient
+	private int quantity = 1;
 	
 }
