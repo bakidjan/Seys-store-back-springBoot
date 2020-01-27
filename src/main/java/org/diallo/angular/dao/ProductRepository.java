@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin("*")
 public interface ProductRepository extends JpaRepository<Product, Long> {
 	
-	@RestResource(path = "/selectedProducts")
-	public List<Product> findBySelectedIsTrue();
+	@RestResource(path = "/newCollectionProducts")
+	public List<Product> findByNewCollectionIsTrue();
 	
 	@RestResource(path = "/productsByKeyword")
 	public List<Product> findByNameContains(@Param("motCle") String mc);

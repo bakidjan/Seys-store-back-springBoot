@@ -4,8 +4,11 @@ import java.util.Random;
 
 import org.diallo.angular.dao.CategoryRepository;
 import org.diallo.angular.dao.ProductRepository;
+import org.diallo.angular.dao.UserRepository;
 import org.diallo.angular.entities.Category;
 import org.diallo.angular.entities.Product;
+import org.diallo.angular.entities.Role;
+import org.diallo.angular.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,7 +16,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 
 import net.bytebuddy.utility.RandomString;
-
 
 @SpringBootApplication
 public class AngularApplication implements CommandLineRunner{
@@ -26,6 +28,8 @@ public class AngularApplication implements CommandLineRunner{
 	//anable id in jason data
 	@Autowired
 	private RepositoryRestConfiguration repositoryRestConfiguration;
+	@Autowired
+	private UserRepository userRepository;
 
 	
 	public static void main(String[] args) {
@@ -37,8 +41,8 @@ public class AngularApplication implements CommandLineRunner{
 		repositoryRestConfiguration.exposeIdsFor(Product.class, Category.class);
 		categoryRepository.save(new Category(null, "Computers", null, null, null));
 		categoryRepository.save(new Category(null, "Printers", null, null, null));
-		categoryRepository.save(new Category(null, "Smart phones", null, null, null));
-		categoryRepository.save(new Category(null, "Accesories", null, null, null));
+		categoryRepository.save(new Category(null, "Phones", null, null, null));
+		//categoryRepository.save(new Category(null, "Tools", null, "daba", null));
 		
 		Random rd = new Random();
 		categoryRepository.findAll().forEach(c->{
@@ -48,15 +52,18 @@ public class AngularApplication implements CommandLineRunner{
 				p.setName(RandomString.make(7));
 				p.setAvailable(rd.nextBoolean());
 				p.setPromotion(rd.nextBoolean());
-				p.setSelected(rd.nextBoolean());
+				p.setNewCollection(rd.nextBoolean());
 				p.setCategory(c);
-				p.setCurrentPrice(100+rd.nextInt(1000));
+				p.setCurrentPrice(100+rd.nextInt(700));
+				p.setPrice(100+rd.nextInt(700));
 				p.setPhotoName("unknown.png");
 			    productRepository.save(p);
 				
 			}
 		});
-		
+		userRepository.save(new User(null, "admin", "admin@gmail.com", "admin", Role.ADMIN));
+		userRepository.save(new User(null, "user", "user@gmail.com", "user", Role.USER));
+
 	}
 
 }
