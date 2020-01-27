@@ -1,6 +1,7 @@
 package org.diallo.angular.web;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Optional;
@@ -22,7 +23,7 @@ import javax.validation.Valid;
 
 @RestController
 @CrossOrigin("*")
-public class CatalogueRestController {
+public class CatalogueRestController extends RuntimeException {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
@@ -78,9 +79,27 @@ public class CatalogueRestController {
     }
 
     @PostMapping("/addUser")
-    public User userUser(@RequestBody User user) {
-        user.setRole(Role.USER);
-        return userRepository.save(user);
+    public User userUser(@RequestBody User updateUser) throws DataIntegrityViolationException {
+/*        user.setRole(Role.USER);
+        User u = userRepository.save(user);
+        System.out.println(u);
+        return u;*/
+
+        System.out.print(updateUser.getId());
+        User user = this.userRepository.findOneById(updateUser.getId());
+        if (user == null) {
+            user = new User();
+        }
+
+        if (updateUser.getEmail() != null && !updateUser.getEmail().equals("")) {
+            User userCheck = this.userRepository.findOneByEmail(updateUser.getEmail());
+            if (userCheck == null) {
+                user.setEmail(updateUser.getEmail());
+            } else {
+                throw new DataIntegrityViolationException("L'email " + updateUser.getEmail().toUpperCase() + " est déjà utilisé !");
+            }
+        }
+        return this.userRepository.save(user);
     }
 
     @PostMapping("/addAdmin")
