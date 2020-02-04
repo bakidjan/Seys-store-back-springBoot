@@ -79,27 +79,51 @@ public class CatalogueRestController extends RuntimeException {
     }
 
     @PostMapping("/addUser")
-    public User userUser(@RequestBody User updateUser) throws DataIntegrityViolationException {
-/*        user.setRole(Role.USER);
-        User u = userRepository.save(user);
-        System.out.println(u);
-        return u;*/
+    public User userUser(@RequestBody User updateUser) throws DataIntegrityViolationException{
 
-        System.out.print(updateUser.getId());
-        User user = this.userRepository.findOneById(updateUser.getId());
+        userRepository.findAll().forEach(u->{
+            System.out.println(u);
+            if (u.getEmail()!=updateUser.getEmail()){
+                updateUser.setRole(Role.USER);
+                userRepository.save(updateUser);
+            } else {
+                throw new DataIntegrityViolationException("pas bon mec");
+            }
+        });
+        return updateUser;
+        //throw new DataIntegrityViolationException('sdfsd')
+
+
+
+
+
+       /*User user = userRepository.findOneByEmail(updateUser.getEmail());
+       if(user==null){
+           user.setRole(Role.USER);
+           userRepository.save(user);
+       } else{
+           throw new DataIntegrityViolationException("L'email " + updateUser.getEmail().toUpperCase() + " est déjà utilisé !");
+       }
+
+        System.out.println(user);
+        return user;*/
+
+        /*System.out.print(updateUser.getId());
+        User user = userRepository.findOneById(updateUser.getId());
         if (user == null) {
             user = new User();
         }
 
         if (updateUser.getEmail() != null && !updateUser.getEmail().equals("")) {
-            User userCheck = this.userRepository.findOneByEmail(updateUser.getEmail());
+            User userCheck = userRepository.findOneByEmail(updateUser.getEmail());
             if (userCheck == null) {
                 user.setEmail(updateUser.getEmail());
+                user.setRole(Role.USER);
             } else {
                 throw new DataIntegrityViolationException("L'email " + updateUser.getEmail().toUpperCase() + " est déjà utilisé !");
             }
         }
-        return this.userRepository.save(user);
+        return this.userRepository.save(user);*/
     }
 
     @PostMapping("/addAdmin")
