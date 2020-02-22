@@ -35,6 +35,7 @@
 		<dependency>
 		    <groupId>org.springframework.data</groupId>
 		    <artifactId>spring-data-rest-core</artifactId>
+		    <version>3.2.4.RELEASE</version>
 		</dependency> 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
