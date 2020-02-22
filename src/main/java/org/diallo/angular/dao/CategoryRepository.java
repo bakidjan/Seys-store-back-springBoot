@@ -4,6 +4,7 @@ package org.diallo.angular.dao;
 import java.util.List;
 
 import org.diallo.angular.entities.Category;
+import org.diallo.angular.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -19,3 +20,4 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 	public List<Category> findByNameContains(@Param("motCle") String mc);
 
 }
+
