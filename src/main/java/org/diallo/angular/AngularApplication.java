@@ -99,6 +99,23 @@ class KeycloakSpringSecurityConfig extends KeycloakWebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		super.configure(http);
-		http.authorizeRequests().antMatchers("/products/**").hasAuthority("manager");
+		http.authorizeRequests().antMatchers("/**").anonymous();
 	}
+	/*
+	send this url in ARC or postman
+	for access token
+	{
+		Method : post
+		Request URL : "http://localhost:8080/auth/realms/sey-store-realm/protocol/openid-connect/token"
+		headers{
+			Content-Type : application/x-www-form-urlencoded
+	}
+		body{
+			username : diallo // username
+			password : diallo // pwd
+			client_id : sey-store-back //application name
+			grant_type : password
+		}
+	}
+	 */
 }
