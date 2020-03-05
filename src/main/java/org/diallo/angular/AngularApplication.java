@@ -99,7 +99,7 @@ class KeycloakSpringSecurityConfig extends KeycloakWebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		super.configure(http);
-		http.authorizeRequests().antMatchers("/**").anonymous();
+		http.authorizeRequests().antMatchers("/**", "/products/**", "/categories/**").anonymous();
 	}
 	/*
 	send this url in ARC or postman
