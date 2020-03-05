@@ -9,9 +9,9 @@ import org.diallo.angular.entities.Category;
 import org.diallo.angular.entities.Product;
 import org.diallo.angular.entities.Role;
 import org.diallo.angular.entities.User;
-import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
+/*import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
-import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;
+import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,11 +21,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 
 import net.bytebuddy.utility.RandomString;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+/*import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
-import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
+import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;*/
 
 @SpringBootApplication
 public class AngularApplication implements CommandLineRunner{
@@ -49,9 +49,9 @@ public class AngularApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		repositoryRestConfiguration.exposeIdsFor(Product.class, Category.class);
-		categoryRepository.save(new Category(null, "Computers", null, null, null));
-		categoryRepository.save(new Category(null, "Printers", null, null, null));
-		categoryRepository.save(new Category(null, "Phones", null, null, null));
+		categoryRepository.save(new Category(null, "Hommes", null, null, null));
+		categoryRepository.save(new Category(null, "Femmes", null, null, null));
+		categoryRepository.save(new Category(null, "Chaussures", null, null, null));
 		//categoryRepository.save(new Category(null, "Tools", null, "daba", null));
 		
 		Random rd = new Random();
@@ -77,7 +77,7 @@ public class AngularApplication implements CommandLineRunner{
 	}
 
 }
-@Configuration
+/*@Configuration
 class KeycloackConfig{
 	@Bean
 	KeycloakSpringBootConfigResolver keycloakSpringBootConfigResolver(){
@@ -99,9 +99,9 @@ class KeycloakSpringSecurityConfig extends KeycloakWebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		super.configure(http);
-		http.authorizeRequests().antMatchers("/**", "/products/**", "/categories/**").anonymous();
+		http.authorizeRequests().antMatchers("/**").anonymous();
 	}
-	/*
+	*//*
 	send this url in ARC or postman
 	for access token
 	{
@@ -117,5 +117,5 @@ class KeycloakSpringSecurityConfig extends KeycloakWebSecurityConfigurerAdapter{
 			grant_type : password
 		}
 	}
-	 */
-}
+	 *//*
+}*/
