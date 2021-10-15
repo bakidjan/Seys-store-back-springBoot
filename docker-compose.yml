@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: db_bakidjan
+    environment:
+      MYSQL_ROOT_PASSWORD: my_secret_password
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_user_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma_bakidjan
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8085:80
+volumes:
+  dbdata:
+
+# deploy mysql db for swag store backend project
+
+# #connect to container
+# docker exec -t -i container_id /bin/bash
+# # inside container allow all privileges
+# # to create db
+# /usr/bin/mysql -u root -p
+# #enter MYSQL_ROOT_PASSWORD, not MYSQL_PASSWORD
+# show grants for 'db_user'; # 'db_user' is a MYSQL_USER
+# grant ALL PRIVILEGES ON *.* TO 'db_user';
