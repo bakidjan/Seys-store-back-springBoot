@@ -13,6 +13,14 @@ services:
       - "3306:3306"
     volumes:
       - dbdata:/var/lib/mysql
+      
+  backend:
+    image: diallo247/swag-store-spring-boot-back:v1
+    container_name: back_bakidjan
+    ports:
+      - "8081:8080"
+    volumes:
+      - dialloback:/usr/lib/diallo
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: pma_bakidjan
@@ -27,6 +35,7 @@ services:
       - 8085:80
 volumes:
   dbdata:
+  dialloback:
 
 # deploy mysql db for swag store backend project
 
@@ -38,3 +47,4 @@ volumes:
 # #enter MYSQL_ROOT_PASSWORD, not MYSQL_PASSWORD
 # show grants for 'db_user'; # 'db_user' is a MYSQL_USER
 # grant ALL PRIVILEGES ON *.* TO 'db_user';
+
