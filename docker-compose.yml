@@ -47,4 +47,8 @@ volumes:
 # #enter MYSQL_ROOT_PASSWORD, not MYSQL_PASSWORD
 # show grants for 'db_user'; # 'db_user' is a MYSQL_USER
 # grant ALL PRIVILEGES ON *.* TO 'db_user';
+## to connect mysql container 
+# docker exec container_id -it mysql --password
+# show databases;
+# describe mydatabase;
 
